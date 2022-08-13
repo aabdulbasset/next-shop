@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;200;300;400;500&display=swap');
+*{
+    font-family: 'Sarabun', sans-serif;
+}
+nav > div > div > a, nav>div>div>svg{
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+}
+nav > div > div > a:hover, nav>div>div>svg:hover {
+    color: #8d5bf6;
+}
+svg{
+    display: unset;
+}
+html,body,#__next{
+    width:100%;
+    min-height: 100%
+}
+
+main{
+    background-color: rgba(217, 217, 217, 0.32);
+    overflow:auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 5vh 0;
+}
+#hero-container{
+    background-position: center;
+    background-size: cover;
+    background-image: url("https://images.pexels.com/photos/777001/pexels-photo-777001.jpeg")
+}
+#product-image{
+    width:250px;
+    height:200px;
+}
+.btn-active{
+    color:white!important
+}
+#search-filters::-webkit-scrollbar {
+    display: none;
+}
+#search-filters{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
