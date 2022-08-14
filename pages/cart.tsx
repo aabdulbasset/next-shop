@@ -41,7 +41,7 @@ export default function Cart() {
     setCartTotal(0);
     Object.entries(cart).forEach(async (e) => {
       let result = await fetch(
-        `https://e-store-api-clean.herokuapp.com/api/products?id=${e[0]}`
+        `https://e-store-api-clean.herokuapp.com/api/product?id=${e[0]}`
       );
       let JsonResult = await result.json();
       setCartTotal((prev) => prev + JsonResult["message"].price * Number(e[1]));

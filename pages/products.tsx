@@ -66,7 +66,7 @@ export default function ProductsPage() {
   async function fetchProducts() {
     startSkeleton();
     const result = await fetch(
-      "https://e-store-api-clean.herokuapp.com/api/products/all"
+      "https://e-store-api-clean.herokuapp.com/api/product/all"
     );
     const JsonResult = await result.json();
     setProducts(JsonResult["message"]);
