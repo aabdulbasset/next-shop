@@ -14,7 +14,9 @@ export default function Featured({ products }) {
         <div id={"cards"} className={"flex gap-12 items-center justify-center"}>
           {products.map((product) => (
             <ProductCard
+            rating = {product.rating}
               id={product.id}
+              stock={product.stock}
               name={product.name}
               description={product.description}
               price={product.price}

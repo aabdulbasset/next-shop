@@ -8,3 +8,11 @@ export type User = {
   id: number
   name: string
 }
+
+export  type detailsType={
+  id:string,
+  stock:Number,
+  name:string,
+  price:string,
+  images:string[]
+}

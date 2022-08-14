@@ -15,13 +15,13 @@ export default function RegisterComponent() {
   function handleRegister(e) {
     e.preventDefault();
     createUserWithEmailAndPassword(
-      document.querySelector("#register-email").value,
-      document.querySelector("#register-password").value
+      (document.querySelector("#register-email") as HTMLInputElement).value,
+      (document.querySelector("#register-password") as HTMLInputElement).value
     );
   }
   if (loading) {
     return (
-      <Modal>
+      <Modal mode="register">
         <ClipLoader />
       </Modal>
     );

@@ -97,6 +97,7 @@ export default function ProductsPage() {
       ) {
         previousValue.push(
           <ProductCard
+          stock={product.stock}
             name={product.name}
             price={product.price}
             image={product.images[0]}
@@ -126,7 +127,9 @@ export default function ProductsPage() {
           "products-cards w-10/12 flex flex-0 flex-wrap gap-6 justify-center"
         }
       >
-        {loading ? <CardSkeleton /> : productsSearch()}
+        {loading ? [1,2,3,4].map(letter=>{
+          return <CardSkeleton />
+        }) : productsSearch()}
       </div>
     </div>
   );

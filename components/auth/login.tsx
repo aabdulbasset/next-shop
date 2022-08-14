@@ -14,14 +14,15 @@ export default function LoginModal() {
   const [user] = useAuthState(auth);
   function handleLogin(e) {
     e.preventDefault();
-    signInWithEmailAndPassword(
-      document.querySelector("#login-email").value,
-      document.querySelector("#login-password").value
-    );
+    let username = document.querySelector("#login-email") as HTMLInputElement;
+    let password = document.querySelector(
+      "#login-password"
+    ) as HTMLInputElement;
+    signInWithEmailAndPassword(username.value, password.value);
   }
   if (loading) {
     return (
-      <Modal>
+      <Modal mode="login">
         <ClipLoader />
       </Modal>
     );

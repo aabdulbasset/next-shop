@@ -2,7 +2,7 @@ export default function ProductsSearch({ searchFn, loadingFn }) {
   function handleSearch(e) {
     e.preventDefault();
     loadingFn(true);
-    searchFn(document.querySelector("#search").value);
+    searchFn((document.querySelector("#search") as HTMLInputElement).value);
   }
   return (
     <form

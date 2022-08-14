@@ -7,8 +7,8 @@ import {FiMonitor,FiUser} from 'react-icons/fi'
 function NavbarLoginComponent(){
     return(
         <div className={"flex gap-2"}>
-            <label for="login-modal" className={"btn btn-sm md:btn-md btn-ghost rounded-md modal-button"}>Login</label>
-            <label for="register-modal" className={"btn btn-sm md:btn-md bg-primary border-none rounded-md text-white"}>Signup</label>
+            <label htmlFor="login-modal" className={"btn btn-sm md:btn-md btn-ghost rounded-md modal-button"}>Login</label>
+            <label htmlFor="register-modal" className={"btn btn-sm md:btn-md bg-primary border-none rounded-md text-white"}>Signup</label>
         </div>
     )
 }
