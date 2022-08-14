@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useMemo, useState } from "react";
 import CartItem from "../components/cart/cartitem";
 import updateUserCart from "../utils/updatecart";
+import { endpoints } from "../utils/endpoints";
 function PriceHeadings(text, price) {
   return (
     <div className={"flex justify-between text-xl border-b py-4"}>
@@ -20,14 +21,11 @@ export default function Cart() {
   async function fetchCart() {
     setLoading(true);
     if (user) {
-      let result = await fetch(
-        "https://e-store-api-clean.herokuapp.com/api/cart?id=" + user.uid,
-        {
-          headers: {
-            Authorization: "Bearer " + (await user.getIdToken()),
-          },
-        }
-      );
+      let result = await fetch(endpoints.cartInfo + user.uid, {
+        headers: {
+          Authorization: "Bearer " + (await user.getIdToken()),
+        },
+      });
       let JsonResult = await result.json();
       localStorage.setItem(
         "cart",
@@ -36,19 +34,18 @@ export default function Cart() {
       setCart(JsonResult["message"]["items"]);
     }
   }
-  useMemo(calculateTotal, [cart]);
+
   function calculateTotal() {
     setCartTotal(0);
     Object.entries(cart).forEach(async (e) => {
-      let result = await fetch(
-        `https://e-store-api-clean.herokuapp.com/api/product?id=${e[0]}`
-      );
+      let result = await fetch(endpoints.productInfo + e[0]);
       let JsonResult = await result.json();
       setCartTotal((prev) => prev + JsonResult["message"].price * Number(e[1]));
     });
     setLoading(false);
   }
   useEffect(() => {
+    calculateTotal();
     (async () => {
       if (user) {
         updateUserCart({ id: user.uid, token: await user.getIdToken() });
@@ -99,6 +96,7 @@ export default function Cart() {
       </div>
     );
   } else if (loading || isLoading) {
+    console.log(isLoading);
     return <></>;
   } else {
     return <div>You are not logged in</div>;

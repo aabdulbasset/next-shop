@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { BsCheckAll } from "react-icons/bs";
 import { GoX } from "react-icons/go";
-import updateUserCart from "../../utils/updatecart";
-import {detailsType} from '../../interfaces/index'
+import { detailsType } from "../../interfaces/index";
+import { endpoints } from "../../utils/endpoints";
+
 export default function CartItem({ item, cartFn }) {
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(true);
   async function fetchProductDetails() {
-    let result = await fetch(
-      `https://e-store-api-clean.herokuapp.com/api/products?id=${item[0]}`
-    );
+    let result = await fetch(endpoints.productInfo + item[0]);
     let JsonResult = await result.json();
     setDetails(JsonResult["message"]);
 
@@ -67,14 +66,16 @@ export default function CartItem({ item, cartFn }) {
         />
         <div className={"flex flex-col justify-between px-4"}>
           <div>
-            <h5 className={"font-bold"}>{(details as detailsType).name as string}</h5>
+            <h5 className={"font-bold"}>
+              {(details as detailsType).name as string}
+            </h5>
             <h5>{"GPU"}</h5>
             <h5 id={"cart-price"} className={"font-bold"}>
               {(details as detailsType).price as string} L.E
             </h5>
             <select
               onChange={updateCart}
-              data-id={(details as detailsType).id }
+              data-id={(details as detailsType).id}
               id="countries"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
@@ -82,12 +83,15 @@ export default function CartItem({ item, cartFn }) {
             </select>
           </div>
           <div>
-            {details && (details as detailsType).stock >= cart[(details as detailsType).id] ? (
+            {details &&
+            (details as detailsType).stock >=
+              cart[(details as detailsType).id] ? (
               <BsCheckAll className={"text-2xl"} />
             ) : (
               <GoX />
             )}{" "}
-            {details && (details as detailsType).stock >= cart[(details as detailsType).id]
+            {details &&
+            (details as detailsType).stock >= cart[(details as detailsType).id]
               ? " In stock"
               : "Out of stock"}
           </div>

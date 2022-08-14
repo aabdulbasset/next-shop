@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import ProductsSearch from "../components/products/search";
 import ProductCard from "../components/products/card";
 import CardSkeleton from "../components/products/skeleton";
+import { endpoints } from "../utils/endpoints";
 
 function ProductsFilter({ filters, changeFilter, loadingFn }) {
   //handle filter clicks
@@ -65,16 +66,12 @@ export default function ProductsPage() {
 
   async function fetchProducts() {
     startSkeleton();
-    const result = await fetch(
-      "https://e-store-api-clean.herokuapp.com/api/product/all"
-    );
+    const result = await fetch(endpoints.allProducts);
     const JsonResult = await result.json();
     setProducts(JsonResult["message"]);
   }
   async function fetchCategories() {
-    const result = await fetch(
-      "https://e-store-api-clean.herokuapp.com/api/category/all"
-    );
+    const result = await fetch(endpoints.allCategories);
     const JsonResult = await result.json();
     setCategories(JsonResult["message"]);
   }
@@ -97,7 +94,7 @@ export default function ProductsPage() {
       ) {
         previousValue.push(
           <ProductCard
-          stock={product.stock}
+            stock={product.stock}
             name={product.name}
             price={product.price}
             image={product.images[0]}
@@ -127,9 +124,11 @@ export default function ProductsPage() {
           "products-cards w-10/12 flex flex-0 flex-wrap gap-6 justify-center"
         }
       >
-        {loading ? [1,2,3,4].map(letter=>{
-          return <CardSkeleton />
-        }) : productsSearch()}
+        {loading
+          ? [1, 2, 3, 4].map((letter) => {
+              return <CardSkeleton />;
+            })
+          : productsSearch()}
       </div>
     </div>
   );
