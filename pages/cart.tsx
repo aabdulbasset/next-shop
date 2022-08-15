@@ -16,7 +16,7 @@ function PriceHeadings(text, price) {
 export default function Cart() {
   const [isLoading, setLoading] = useState(true);
   const [user, loading, error] = useAuthState(auth);
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState();
   const [cartTotal, setCartTotal] = useState(0);
   async function fetchCart() {
     setLoading(true);
@@ -27,41 +27,40 @@ export default function Cart() {
         },
       });
       let JsonResult = await result.json();
-      localStorage.setItem(
-        "cart",
-        JSON.stringify(JsonResult["message"]["items"])
-      );
-      setCart(JsonResult["message"]["items"]);
+      setCart(JsonResult["message"]);
     }
   }
 
   function calculateTotal() {
-    setCartTotal(0);
-    Object.entries(cart).forEach(async (e) => {
-      let result = await fetch(endpoints.productInfo + e[0]);
-      let JsonResult = await result.json();
-      setCartTotal((prev) => prev + JsonResult["message"].price * Number(e[1]));
-    });
-    setLoading(false);
+    if (cart && cart.length > 0) {
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.price;
+      });
+      setCartTotal(total);
+    }
   }
   useEffect(() => {
-    calculateTotal();
-    (async () => {
-      if (user) {
-        updateUserCart({ id: user.uid, token: await user.getIdToken() });
-      }
-    })();
+    // calculateTotal();
+    // (async () => {
+    //   if (user) {
+    //     updateUserCart({ id: user.uid, token: await user.getIdToken() });
+    //   }
+    // })();
   }, [cart]);
 
   useEffect(() => {
     (async function () {
-      if (!localStorage.getItem("cart")) {
-        await fetchCart();
+      if (!isLoading) {
+        calculateTotal();
       } else {
-        setCart(JSON.parse(localStorage.getItem("cart")));
+        console.log("fetching");
+        await fetchCart();
+        setLoading(false);
       }
     })();
-  }, [loading]);
+  }, [isLoading]);
+
   if (user && !isLoading) {
     return (
       <div id={"cart-container"} className={"w-10/12 mx-auto"}>
@@ -70,8 +69,8 @@ export default function Cart() {
         </h1>
         <div id={"cart-container"} className={"flex justify-between"}>
           <div id={"cart-items"} className={"flex flex-col grow"}>
-            {Object.entries(cart).map((item) => {
-              return <CartItem item={item} cartFn={setCart} />;
+            {cart.map((item) => {
+              return <CartItem item={item} />;
             })}
           </div>
           <div
@@ -96,7 +95,6 @@ export default function Cart() {
       </div>
     );
   } else if (loading || isLoading) {
-    console.log(isLoading);
     return <></>;
   } else {
     return <div>You are not logged in</div>;

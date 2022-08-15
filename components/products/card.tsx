@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export default function ProductCard({
   id,
   name,
@@ -15,10 +17,19 @@ export default function ProductCard({
       Object.assign(cart, { [e.target.dataset.id]: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("🦄 Wow so easy!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
   }
   return (
     <div
-      className="w-full max-w-xs max-h-96 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between"
+      className="bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between"
       data-id={id}
       key={id}
     >
@@ -28,11 +39,17 @@ export default function ProductCard({
         src={image}
         alt="product image"
       />
-      <div className="px-5 pb-5 max-w-xs">
-        <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-ellipsis my-4 overflow-hidden whitespace-nowrap">
+      <div className="px-5 pb-5 ">
+        <h5 className="w-72 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-ellipsis my-4 overflow-hidden whitespace-nowrap">
           {name}
         </h5>
-        <span className={"my-6 block"}>{description}</span>
+        <span
+          className={
+            "my-6 w-64 block max-h-fit text-ellipsis whitespace-nowrap overflow-hidden"
+          }
+        >
+          {description}
+        </span>
         <div className="flex justify-between items-center">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             ${price}

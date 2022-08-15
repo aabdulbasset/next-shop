@@ -3,7 +3,8 @@ import ProductsSearch from "../components/products/search";
 import ProductCard from "../components/products/card";
 import CardSkeleton from "../components/products/skeleton";
 import { endpoints } from "../utils/endpoints";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function ProductsFilter({ filters, changeFilter, loadingFn }) {
   //handle filter clicks
   function handleFilter(e) {
@@ -31,6 +32,7 @@ function ProductsFilter({ filters, changeFilter, loadingFn }) {
       id={"search-filters"}
       className={"my-4 mx-auto w-10/12 flex justify-center"}
     >
+      <ToastContainer />
       <div
         className="btn-group overflow-auto flex-nowrap "
         id={"filters"}
@@ -66,6 +68,7 @@ export default function ProductsPage() {
 
   async function fetchProducts() {
     startSkeleton();
+
     const result = await fetch(endpoints.allProducts);
     const JsonResult = await result.json();
     setProducts(JsonResult["message"]);
@@ -125,7 +128,7 @@ export default function ProductsPage() {
         }
       >
         {loading
-          ? [1, 2, 3, 4].map((letter) => {
+          ? [1, 2, 3, 4].map(() => {
               return <CardSkeleton />;
             })
           : productsSearch()}
