@@ -32,7 +32,6 @@ function ProductsFilter({ filters, changeFilter, loadingFn }) {
       id={"search-filters"}
       className={"my-4 mx-auto w-10/12 flex justify-center"}
     >
-      <ToastContainer />
       <div
         className="btn-group overflow-auto flex-nowrap "
         id={"filters"}

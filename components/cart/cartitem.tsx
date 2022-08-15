@@ -1,14 +1,37 @@
 import { useEffect, useState } from "react";
 import { BsCheckAll } from "react-icons/bs";
 import { GoX } from "react-icons/go";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../utils/firebaseconfig";
 import { detailsType } from "../../interfaces/index";
-
-export default function CartItem({ item }) {
-  function removeFromCart(e) {
-    // updateCart();
+import removeCart from "../../utils/updatecart";
+export default function CartItem({ item, cartUpdateFn }) {
+  const [user, loading, error] = useAuthState(auth);
+  async function removeFromCart(e) {
+    await removeCart(
+      e.target.dataset.id,
+      user.uid,
+      await user.getIdToken(),
+      "delete"
+    );
+    cartUpdateFn();
   }
-  function updateCart(e) {
-    // e.preventDefault();
+  async function updateCart(e) {
+    e.preventDefault();
+    let action;
+    if (e.target.value > item.quantity) {
+      action = "add";
+    } else {
+      action = "remove";
+    }
+    await removeCart(
+      e.target.dataset.id,
+      user.uid,
+      await user.getIdToken(),
+      action,
+      Math.abs(item.quantity - e.target.value)
+    );
+    await cartUpdateFn();
     // let cart = JSON.parse(localStorage.getItem("cart"));
     // cart[e.target.dataset.id] = parseInt(e.target.value);
     // localStorage.setItem("cart", JSON.stringify(cart));
@@ -37,7 +60,7 @@ export default function CartItem({ item }) {
   return (
     <div
       className={
-        "flex flex-row h-fit py-4 border-y-2 border-gray-300 w-full mr-4"
+        "flex flex-row h-fit py-4 border-y-2 border-gray-300 w-full mr-4 bg-white"
       }
     >
       <img

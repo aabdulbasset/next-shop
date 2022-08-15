@@ -1,5 +1,6 @@
-import { toast } from "react-toastify";
-
+import addToCart from "../../utils/updatecart";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../utils/firebaseconfig";
 export default function ProductCard({
   id,
   name,
@@ -9,23 +10,10 @@ export default function ProductCard({
   rating,
   stock,
 }) {
-  function addToCart(e) {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    if (cart[e.target.dataset.id]) {
-      cart[e.target.dataset.id] += 1;
-    } else {
-      Object.assign(cart, { [e.target.dataset.id]: 1 });
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("🦄 Wow so easy!", {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
+  const [user, loading, error] = useAuthState(auth);
+  async function handleAddClick(e) {
+    e.preventDefault();
+    addToCart(e.target.dataset.id, user.uid, await user.getIdToken(), "add");
   }
   return (
     <div
@@ -44,9 +32,8 @@ export default function ProductCard({
           {name}
         </h5>
         <span
-          className={
-            "my-6 w-64 block max-h-fit text-ellipsis whitespace-nowrap overflow-hidden"
-          }
+          id={"product-description"}
+          className={"my-6 w-64 block max-h-fit text-ellipsis overflow-hidden"}
         >
           {description}
         </span>
@@ -58,7 +45,7 @@ export default function ProductCard({
             href="#"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             data-id={id}
-            onClick={addToCart}
+            onClick={handleAddClick}
           >
             Add to cart
           </a>
