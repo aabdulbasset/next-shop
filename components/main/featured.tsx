@@ -11,10 +11,15 @@ export default function Featured({ products }) {
           Featured Products
           <i className={"block text-2xl mt-4 font-normal"}>Best of the best</i>
         </h1>
-        <div id={"cards"} className={"flex gap-12 items-center justify-center"}>
+        <div
+          id={"cards"}
+          className={
+            "flex flex-col md:flex-row gap-12 items-center justify-center"
+          }
+        >
           {products.map((product) => (
             <ProductCard
-            rating = {product.rating}
+              rating={product.rating}
               id={product.id}
               stock={product.stock}
               name={product.name}

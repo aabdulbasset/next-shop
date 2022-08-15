@@ -60,12 +60,12 @@ export default function CartItem({ item, cartUpdateFn }) {
   return (
     <div
       className={
-        "flex flex-row h-fit py-4 border-y-2 border-gray-300 w-full mr-4 bg-white"
+        "flex flex-col md:flex-row h-fit py-4 border-y-2 border-gray-300 w-full mr-4 bg-white"
       }
     >
       <img
         src={(item as detailsType).images[0]}
-        className={"max-w-[200px] h-[200px] max object-contain"}
+        className={"max-w-[200px] h-[200px] max object-contain m-auto"}
       />
       <div className={"flex flex-col justify-between px-4"}>
         <div>

@@ -20,8 +20,12 @@ export default function Hero() {
             "text-white flex items-center grow flex-col gap-12 justify-center w-full h-full backdrop-blur-md"
           }
         >
-          <h1 className={"text-8xl uppercase"}>Your dream starts here</h1>
-          <h2 className={"text-4xl"}>
+          <h1
+            className={"lg:text-6xl md:text-6xl sm:text-4xl text-2xl uppercase"}
+          >
+            Your dream starts here
+          </h1>
+          <h2 className={"lg:text-2xl md:text-2xl text-xs sm:text-xl"}>
             Unlock your potential - Build your dream PC.
           </h2>
           <Link href={"/products"}>

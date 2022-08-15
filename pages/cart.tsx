@@ -64,7 +64,10 @@ export default function Cart() {
         <h1 className={"text-5xl font-bold border-b py-4 w-full"}>
           Shopping Cart
         </h1>
-        <div id={"cart-container"} className={"flex justify-between"}>
+        <div
+          id={"cart-container"}
+          className={"flex justify-between md:flex-row flex-col gap-6"}
+        >
           {cart.length > 0 ? (
             <>
               <div id={"cart-items"} className={"flex flex-col grow"}>
@@ -75,7 +78,7 @@ export default function Cart() {
               <div
                 id={"cart-summary"}
                 className={
-                  "rounded-md bg-white h-max shadow-md ml-4 p-12 min-w-[25vw]"
+                  "rounded-md bg-white h-max shadow-md md:ml-4 p-12 min-w-[25vw]"
                 }
               >
                 <h2 className={"font-bold text-3xl"}>Order summary</h2>
