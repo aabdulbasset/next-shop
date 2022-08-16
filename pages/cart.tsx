@@ -1,6 +1,6 @@
 import { auth } from "../utils/firebaseconfig";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import CartItem from "../components/cart/cartitem";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { endpoints } from "../utils/endpoints";
@@ -15,7 +15,7 @@ function PriceHeadings(text, price) {
 
 export default function Cart() {
   const [isLoading, setLoading] = useState(true);
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   async function fetchCart() {
@@ -70,7 +70,12 @@ export default function Cart() {
         >
           {cart.length > 0 ? (
             <>
-              <div id={"cart-items"} className={"flex flex-col grow"}>
+              <div
+                id={"cart-items"}
+                className={
+                  "flex flex-col grow rounded-md overflow-hidden shadow-md h-max"
+                }
+              >
                 {cart.map((item) => {
                   return <CartItem item={item} cartUpdateFn={fetchCart} />;
                 })}

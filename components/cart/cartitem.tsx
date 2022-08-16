@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { BsCheckAll } from "react-icons/bs";
 import { GoX } from "react-icons/go";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebaseconfig";
 import { detailsType } from "../../interfaces/index";
 import removeCart from "../../utils/updatecart";
+
 export default function CartItem({ item, cartUpdateFn }) {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   async function removeFromCart(e) {
     await removeCart(
       e.target.dataset.id,
@@ -32,6 +32,7 @@ export default function CartItem({ item, cartUpdateFn }) {
       Math.abs(item.quantity - e.target.value)
     );
     await cartUpdateFn();
+
     // let cart = JSON.parse(localStorage.getItem("cart"));
     // cart[e.target.dataset.id] = parseInt(e.target.value);
     // localStorage.setItem("cart", JSON.stringify(cart));
@@ -60,12 +61,13 @@ export default function CartItem({ item, cartUpdateFn }) {
   return (
     <div
       className={
-        "flex flex-col md:flex-row h-fit py-4 border-y-2 border-gray-300 w-full mr-4 bg-white"
+        "flex flex-col md:flex-row h-fit py-4 border-y border-gray-200 w-full mr-4 bg-white"
       }
     >
       <img
+        alt={`${item.name} image`}
         src={(item as detailsType).images[0]}
-        className={"max-w-[200px] h-[200px] max object-contain m-auto"}
+        className={"max-w-[200px] h-[200px] max object-contain md:m-4 m-auto"}
       />
       <div className={"flex flex-col justify-between px-4"}>
         <div>
@@ -80,7 +82,7 @@ export default function CartItem({ item, cartUpdateFn }) {
             onChange={updateCart}
             data-id={(item as detailsType).id}
             id="countries"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="w-[100px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             {getSelection()}
           </select>
