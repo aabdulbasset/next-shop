@@ -1,9 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import ProductsSearch from "../components/products/search";
 import ProductCard from "../components/products/card";
 import CardSkeleton from "../components/products/skeleton";
 import { endpoints } from "../utils/endpoints";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function ProductsFilter({ filters, changeFilter, loadingFn }) {
   //handle filter clicks
@@ -51,10 +50,22 @@ function ProductsFilter({ filters, changeFilter, loadingFn }) {
     </div>
   );
 }
-
-export default function ProductsPage() {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+export async function getStaticProps() {
+  let productsRequest = await fetch(endpoints.allProducts);
+  let products = await productsRequest.json();
+  let categoriesRequest = await fetch(endpoints.allCategories);
+  let categories = await categoriesRequest.json();
+  return {
+    props: {
+      products: products["message"],
+      categories: categories["message"],
+    },
+    revalidate: 10,
+  };
+}
+export default function ProductsPage({ products, categories }) {
+  // const [categories, setCategories] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(0);
@@ -65,25 +76,25 @@ export default function ProductsPage() {
     }, 700);
   }
 
-  async function fetchProducts() {
-    startSkeleton();
+  // async function fetchProducts() {
+  //   startSkeleton();
+  //
+  //   const result = await fetch(endpoints.allProducts);
+  //   const JsonResult = await result.json();
+  //   setProducts(JsonResult["message"]);
+  // }
+  // async function fetchCategories() {
+  //   const result = await fetch(endpoints.allCategories);
+  //   const JsonResult = await result.json();
+  //   setCategories(JsonResult["message"]);
+  // }
 
-    const result = await fetch(endpoints.allProducts);
-    const JsonResult = await result.json();
-    setProducts(JsonResult["message"]);
-  }
-  async function fetchCategories() {
-    const result = await fetch(endpoints.allCategories);
-    const JsonResult = await result.json();
-    setCategories(JsonResult["message"]);
-  }
-
-  useEffect(() => {
-    (async function () {
-      await fetchProducts();
-      await fetchCategories();
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async function () {
+  //     await fetchProducts();
+  //     await fetchCategories();
+  //   })();
+  // }, []);
   useEffect(() => {
     startSkeleton();
   }, [search, filter]);

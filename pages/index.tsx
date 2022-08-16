@@ -1,20 +1,20 @@
 import Hero from "../components/main/hero";
 import Featured from "../components/main/featured";
 import Testimonial from "../components/main/testimonial";
-import { useEffect, useState } from "react";
+
 import { endpoints } from "../utils/endpoints";
-function App() {
-  const [products, setProducts] = useState([]);
-  async function fetchProducts() {
-    const result = await fetch(endpoints.allProducts + "?limit=3&sort=asc");
-    const JsonResult = await result.json();
-    setProducts(JsonResult["message"]);
-  }
-  useEffect(() => {
-    (async function () {
-      await fetchProducts();
-    })();
-  }, []);
+function App({ products }) {
+  // const [products, setProducts] = useState([]);
+  // async function fetchProducts() {
+  //   const result = await fetch(endpoints.allProducts + "?limit=3&sort=asc");
+  //   const JsonResult = await result.json();
+  //   setProducts(JsonResult["message"]);
+  // }
+  // useEffect(() => {
+  //   (async function () {
+  //     await fetchProducts();
+  //   })();
+  // }, []);
   return (
     <>
       <Hero />
@@ -26,5 +26,14 @@ function App() {
     </>
   );
 }
-
+export async function getStaticProps() {
+  let productsRequest = await fetch(endpoints.allProducts);
+  let products = await productsRequest.json();
+  return {
+    props: {
+      products: products["message"],
+    },
+    revalidate: 10,
+  };
+}
 export default App;
