@@ -18,6 +18,7 @@ export default function Cart() {
   const [user, loading] = useAuthState(auth);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+
   async function fetchCart() {
     setLoading(true);
     if (user) {
@@ -43,6 +44,7 @@ export default function Cart() {
       setCartTotal(total);
     }
   }
+
   useEffect(() => {
     calculateTotal();
     // (async () => {
