@@ -27,7 +27,9 @@ function App({ products }) {
   );
 }
 export async function getStaticProps() {
-  let productsRequest = await fetch(endpoints.allProducts);
+  let productsRequest = await fetch(
+    endpoints.allProducts + "?limit=3&sort=asc"
+  );
   let products = await productsRequest.json();
   return {
     props: {

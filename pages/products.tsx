@@ -134,7 +134,7 @@ export default function ProductsPage({ products, categories }) {
       />
       <div
         className={
-          "products-cards w-10/12 flex flex-0 flex-wrap gap-6 justify-center"
+          "products-cards w-10/12 p-4 flex flex-wrap gap-6 justify-center"
         }
       >
         {loading

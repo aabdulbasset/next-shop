@@ -22,13 +22,13 @@ export default function ProductCard({
       key={id}
     >
       <img
-        className="rounded-t-lg overflow-hidden mx-auto object-cover max-w-fit"
+        className="rounded-t-lg mix-blend-multiply overflow-hidden mx-auto object-cover max-w-fit"
         id={"product-image"}
         src={image}
         alt="product image"
       />
       <div className="px-5 pb-5 ">
-        <h5 className="w-72 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-ellipsis my-4 overflow-hidden whitespace-nowrap">
+        <h5 className="w-72 text-xl font-semibold tracking-tight text-gray-900 dark:text-white my-4">
           {name}
         </h5>
         <span
