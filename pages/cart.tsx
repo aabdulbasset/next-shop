@@ -109,7 +109,7 @@ export default function Cart() {
     );
   } else if (loading || isLoading || cart.length == 0) {
     return (
-      <div className={"m-auto "}>
+      <div className={"m-auto"}>
         <ScaleLoader />
       </div>
     );

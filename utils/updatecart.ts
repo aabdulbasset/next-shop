@@ -22,15 +22,13 @@ export default async function updateCart(
       "Content-Type": "application/json",
     },
   });
-  if (action != "delete") {
-    toast.success(`Done! ${action}ed to cart`, {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
-  }
+  toast.success(`Done! ${action}ed to cart`, {
+    position: "top-center",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  });
 }

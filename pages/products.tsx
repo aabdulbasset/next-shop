@@ -3,7 +3,7 @@ import ProductsSearch from "../components/products/search";
 import ProductCard from "../components/products/card";
 import CardSkeleton from "../components/products/skeleton";
 import { endpoints } from "../utils/endpoints";
-import "react-toastify/dist/ReactToastify.css";
+
 function ProductsFilter({ filters, changeFilter, loadingFn }) {
   //handle filter clicks
   function handleFilter(e) {
