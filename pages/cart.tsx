@@ -47,11 +47,6 @@ export default function Cart() {
 
   useEffect(() => {
     calculateTotal();
-    // (async () => {
-    //   if (user) {
-    //     updateUserCart({ id: user.uid, token: await user.getIdToken() });
-    //   }
-    // })();
   }, [cart]);
 
   useEffect(() => {
@@ -62,13 +57,13 @@ export default function Cart() {
 
   if (user && !isLoading) {
     return (
-      <div id={"cart-container"} className={"w-10/12 mx-auto"}>
+      <div id={"cart-container"} className={"w-10/12 mx-auto "}>
         <h1 className={"text-5xl font-bold border-b py-4 w-full"}>
           Shopping Cart
         </h1>
         <div
           id={"cart-container"}
-          className={"flex justify-between md:flex-row flex-col gap-6"}
+          className={"flex justify-between md:flex-row flex-col gap-6 mt-6"}
         >
           {cart.length > 0 ? (
             <>

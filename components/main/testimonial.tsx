@@ -1,6 +1,31 @@
+import { gsap } from "../../utils/gsapped";
+import { useEffect, useRef } from "react";
+
 export default function () {
+  const testimonialRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      testimonialRef.current,
+      { y: -100, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: "#testimonial",
+          toggleActions: "restart reverse restart reverse",
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1,
+      }
+    );
+  }, []);
+
   return (
-    <section className="glass dark:bg-gray-900 my-6 w-10/12 mx-auto ">
+    <section
+      className="glass dark:bg-gray-900 my-6 w-10/12 mx-auto "
+      ref={testimonialRef}
+      id={"testimonial"}
+    >
       <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
         <figure className="max-w-screen-md mx-auto">
           <svg

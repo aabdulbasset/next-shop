@@ -1,6 +1,8 @@
 import addToCart from "../../utils/updatecart";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebaseconfig";
+import { useEffect, useRef } from "react";
+import { gsap } from "../../utils/gsapped";
 export default function ProductCard({
   id,
   name,
@@ -10,13 +12,36 @@ export default function ProductCard({
   rating,
   stock,
 }) {
-  const [user, loading, error] = useAuthState(auth);
+  const cardRef = useRef();
+  const [user] = useAuthState(auth);
   async function handleAddClick(e) {
     e.preventDefault();
-    addToCart(e.target.dataset.id, user.uid, await user.getIdToken(), "add");
+    await addToCart(
+      e.target.dataset.id,
+      user.uid,
+      await user.getIdToken(),
+      "add"
+    );
   }
+  useEffect(() => {
+    gsap.fromTo(
+      cardRef.current,
+      { opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: "#product-card",
+          toggleActions: "play none none none",
+          start: "top center",
+        },
+        opacity: 1,
+        duration: 1,
+      }
+    );
+  }, []);
   return (
     <div
+      id={"product-card"}
+      ref={cardRef}
       className="bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between"
       data-id={id}
       key={id}

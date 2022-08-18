@@ -4,17 +4,6 @@ import Testimonial from "../components/main/testimonial";
 
 import { endpoints } from "../utils/endpoints";
 function App({ products }) {
-  // const [products, setProducts] = useState([]);
-  // async function fetchProducts() {
-  //   const result = await fetch(endpoints.allProducts + "?limit=3&sort=asc");
-  //   const JsonResult = await result.json();
-  //   setProducts(JsonResult["message"]);
-  // }
-  // useEffect(() => {
-  //   (async function () {
-  //     await fetchProducts();
-  //   })();
-  // }, []);
   return (
     <>
       <Hero />

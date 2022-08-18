@@ -64,8 +64,6 @@ export async function getStaticProps() {
   };
 }
 export default function ProductsPage({ products, categories }) {
-  // const [categories, setCategories] = useState([]);
-  // const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(0);
@@ -76,25 +74,6 @@ export default function ProductsPage({ products, categories }) {
     }, 700);
   }
 
-  // async function fetchProducts() {
-  //   startSkeleton();
-  //
-  //   const result = await fetch(endpoints.allProducts);
-  //   const JsonResult = await result.json();
-  //   setProducts(JsonResult["message"]);
-  // }
-  // async function fetchCategories() {
-  //   const result = await fetch(endpoints.allCategories);
-  //   const JsonResult = await result.json();
-  //   setCategories(JsonResult["message"]);
-  // }
-
-  // useEffect(() => {
-  //   (async function () {
-  //     await fetchProducts();
-  //     await fetchCategories();
-  //   })();
-  // }, []);
   useEffect(() => {
     startSkeleton();
   }, [search, filter]);
@@ -134,7 +113,7 @@ export default function ProductsPage({ products, categories }) {
       />
       <div
         className={
-          "products-cards w-10/12 p-4 flex flex-wrap gap-6 justify-center"
+          "products-cards w-10/12 p-4 my-6 flex flex-wrap gap-6 justify-center"
         }
       >
         {loading

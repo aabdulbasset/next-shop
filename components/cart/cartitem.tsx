@@ -32,11 +32,6 @@ export default function CartItem({ item, cartUpdateFn }) {
       Math.abs(item.quantity - e.target.value)
     );
     await cartUpdateFn();
-
-    // let cart = JSON.parse(localStorage.getItem("cart"));
-    // cart[e.target.dataset.id] = parseInt(e.target.value);
-    // localStorage.setItem("cart", JSON.stringify(cart));
-    // cartFn(cart);
   }
 
   function getSelection() {
