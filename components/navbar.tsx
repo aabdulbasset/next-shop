@@ -69,12 +69,14 @@ export default function Navbar() {
     >
       <div className="navbar w-10/12 flex justify-between ">
         <div className={"h-full"}>
-          <img
-            className={"w-16"}
-            src={
-              "https://www.designbust.com/download/439/png/gaming_pc_icon512.png"
-            }
-          ></img>
+          <Link href={"/"}>
+            <img
+              className={"w-16"}
+              src={
+                "https://www.designbust.com/download/439/png/gaming_pc_icon512.png"
+              }
+            ></img>
+          </Link>
         </div>
         <div className={"flex gap-12 text-base md:text-xl md:mx-4"}>
           <ButtonizedButton link={"/"} name={"Home"} />

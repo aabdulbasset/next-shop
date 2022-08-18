@@ -8,7 +8,7 @@ export default async function updateCart(
   quantity = 1
 ) {
   let data = {
-    id: userId,
+    user_id: userId,
     item_id: parseInt(id),
     action: action,
     quantity: quantity,
