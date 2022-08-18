@@ -66,14 +66,23 @@ export default function ProductCard({
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             ${price}
           </span>
-          <a
-            href="#"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            data-id={id}
-            onClick={handleAddClick}
-          >
-            Add to cart
-          </a>
+          {stock > 0 ? (
+            <a
+              href="#"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              data-id={id}
+              onClick={handleAddClick}
+            >
+              Add to cart
+            </a>
+          ) : (
+            <a
+              className="text-white bg-error hover:cursor-not-allowed  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+              data-id={id}
+            >
+              Out of stock
+            </a>
+          )}
         </div>
       </div>
     </div>
