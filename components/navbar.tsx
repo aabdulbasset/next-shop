@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, signOut } from "../utils/firebaseconfig";
 import { useRef } from "react";
@@ -140,7 +141,7 @@ export default function Navbar() {
             <span></span>
           </button>
           <div
-            className={"w-full bg-white left-0 top-16 z-10 absolute"}
+            className={"w-full hidden bg-white left-0 top-16 z-10 absolute"}
             ref={menuRef}
           >
             <ul
