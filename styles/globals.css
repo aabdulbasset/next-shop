@@ -52,3 +52,41 @@ main{
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.burger {
+    position: relative;
+    width: 22px;
+    height: 14px;
+    cursor: pointer;
+}
+.burger:hover span {
+    background: black;
+}
+.burger span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    transition: all 0.2s, background 0s;
+    background: black;
+}
+.burger span:nth-child(2) {
+    top: 6px;
+}
+.burger span:last-child {
+    top: 12px;
+}
+.nav-open span:first-child, .nav-open span:last-child {
+    top: 8px;
+}
+.nav-open span:first-child {
+    transform: rotate(45deg);
+}
+.nav-open span:last-child {
+    transform: rotate(-45deg);
+}
+.nav-open span:nth-child(2) {
+    opacity: 0;
+    visibility: hidden;
+}

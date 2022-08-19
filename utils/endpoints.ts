@@ -1,7 +1,9 @@
+const base_url = "https://e-store-api-clean.herokuapp.com/api";
 export const endpoints = {
-  cartInfo: "https://e-store-api-clean.herokuapp.com/api/cart?user_id=",
-  allProducts: "https://e-store-api-clean.herokuapp.com/api/product/all",
-  productInfo: "https://e-store-api-clean.herokuapp.com/api/product?id=",
-  allCategories: "https://e-store-api-clean.herokuapp.com/api/category/all",
-  updateCart: "https://e-store-api-clean.herokuapp.com/api/cart",
+  cartInfo: base_url + "/cart?user_id=",
+  allProducts: base_url + "/product/all",
+  productInfo: base_url + "/product?id=",
+  allCategories: base_url + "/category/all",
+  updateCart: base_url + "/cart",
+  checkOut: base_url + "/checkout",
 };

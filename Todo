@@ -1,8 +1,9 @@
-[] - refactor login/register form
+[x] - refactor login/register form
 [x] - refactor cart
 [x] - add products with limit 3 to homepage
 [x] - add alerts on successfully adding to cart
 [x] - ISR - products page
-[] - Animations, a lot of animations
-[] - More responsiveness stuff
+[x] - Animations, a lot of animations
+[x] - More responsiveness stuff
 [] - readme
+[x] - icons and logo

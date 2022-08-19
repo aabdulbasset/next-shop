@@ -7,7 +7,7 @@ export default function Featured({ products }) {
         id={"featured-container"}
         className={"text-center flex gap-12 flex-col"}
       >
-        <h1 className={"font-bold text-6xl"}>
+        <h1 className={"font-bold text-4xl md:text-6xl"}>
           Featured Products
           <i className={"block text-2xl mt-4 font-normal"}>Best of the best</i>
         </h1>

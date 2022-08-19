@@ -18,19 +18,21 @@ export default function Hero() {
   return (
     <section
       id={"hero"}
-      className={"h-[80vh] w-full flex justify-center items-center mx-auto"}
+      className={
+        "md:h-[80vh] h-[50vh] w-full flex justify-center items-center mx-auto"
+      }
     >
       <div
         id={"hero-container"}
         className={
-          "mx-auto h-full relative rounded-md w-full h-full overflow-hidden"
+          "mx-auto h-full relative md:rounded-md w-full h-full overflow-hidden"
         }
       >
         <div
           id={"hero-text"}
           ref={heroRef}
           className={
-            "text-slate-200 flex items-center grow flex-col gap-12 justify-center w-full h-full backdrop-blur-xl"
+            "text-slate-200 flex items-center grow flex-col gap-6 md:gap-12 justify-center w-full h-full backdrop-blur-xl"
           }
         >
           <h1
@@ -40,7 +42,7 @@ export default function Hero() {
           >
             Your dream starts here
           </h1>
-          <h2 className={"lg:text-2xl text md:text-2xl text-xs sm:text-xl"}>
+          <h2 className={"lg:text-2xl text md:text-2xl text-sm sm:text-xl"}>
             Unlock your potential - Build your dream PC.
           </h2>
           <Link href={"/products"}>

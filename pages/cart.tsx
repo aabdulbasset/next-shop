@@ -34,7 +34,32 @@ export default function Cart() {
       });
     }
   }
-
+  async function handleCheckOut(e) {
+    e.preventDefault();
+    if (user) {
+      let result = await fetch(endpoints.checkOut, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + (await user.getIdToken()),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: user.uid }),
+      });
+      result
+        .json()
+        .then((jsonResult) => {
+          console.log(jsonResult["message"]);
+          setCart([]);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setCartTotal(0);
+        });
+    }
+  }
   function calculateTotal() {
     if (cart && cart.length >= 0) {
       let total = 0;
@@ -93,13 +118,16 @@ export default function Cart() {
                   <h4>Order total</h4>
                   <h4>{cartTotal + 20 + Math.round(cartTotal * 0.14)}</h4>
                 </div>
-                <button className={"w-full btn btn-primary mt-6"}>
+                <button
+                  className={"w-full btn btn-primary mt-6"}
+                  onClick={handleCheckOut}
+                >
                   Checkout
                 </button>
               </div>
             </>
           ) : (
-            <div className={"m-auto text-5xl"}>Empty cart :(</div>
+            <div className={"m-auto text-5xl"}>Empty cart.</div>
           )}
         </div>
       </div>

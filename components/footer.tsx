@@ -1,12 +1,12 @@
 export default function Footer() {
   return (
-    <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900 relative top-0  w-full">
+    <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900 relative top-0 mt-6 w-full">
       <div className="sm:flex sm:items-center sm:justify-between w-10/12 mx-auto">
         <a href="/" className="flex items-center mb-4 sm:mb-0">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src="https://images.pling.com/img/00/00/47/52/98/1410012/5dde36d5540a17ac1fcfa2ef5e4f05547e858d8f40637a24d8be500f8ab4139cecbd.png"
             className="mr-3 h-8"
-            alt="Flowbite Logo"
+            alt="Pcmart Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             PcMart
