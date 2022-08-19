@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebaseconfig";
 import { useEffect, useRef } from "react";
 import { gsap } from "../../utils/gsapped";
+import { toast } from "react-toastify";
 export default function ProductCard({
   id,
   name,
@@ -16,12 +17,16 @@ export default function ProductCard({
   const [user] = useAuthState(auth);
   async function handleAddClick(e) {
     e.preventDefault();
-    await addToCart(
-      e.target.dataset.id,
-      user.uid,
-      await user.getIdToken(),
-      "add"
-    );
+    if (user) {
+      await addToCart(
+        e.target.dataset.id,
+        user.uid,
+        await user.getIdToken(),
+        "add"
+      );
+    } else {
+      toast.error("You must be logged in to add to cart");
+    }
   }
   useEffect(() => {
     gsap.fromTo(

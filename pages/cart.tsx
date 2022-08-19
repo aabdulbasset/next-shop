@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CartItem from "../components/cart/cartitem";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { endpoints } from "../utils/endpoints";
+
 function PriceHeadings(text, price) {
   return (
     <div className={"flex justify-between text-xl border-b py-4"}>

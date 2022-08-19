@@ -6,7 +6,8 @@ import { useRef } from "react";
 import { gsap } from "../utils/gsapped";
 import { FiUser } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
-import { FaStore, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
+import { FaShoppingCart, FaSignOutAlt, FaStore } from "react-icons/fa";
+
 function NavbarLoginComponent() {
   return (
     <div className={"flex gap-2 "}>
@@ -40,10 +41,12 @@ function NavbarUserComponent() {
         className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-max"
       >
         <li>
-          <a href={"/cart"}>
-            <FaShoppingCart />
-            Cart
-          </a>
+          <Link href="/cart">
+            <a href={"/cart"}>
+              <FaShoppingCart />
+              Cart
+            </a>
+          </Link>
         </li>
         <li>
           <a onClick={handleSignOut}>
@@ -112,6 +115,7 @@ export default function Navbar() {
         <div className={"h-full"}>
           <Link href={"/"}>
             <img
+              alt={"logo"}
               className={"w-16 cursor-pointer"}
               src={
                 "https://images.pling.com/img/00/00/47/52/98/1410012/5dde36d5540a17ac1fcfa2ef5e4f05547e858d8f40637a24d8be500f8ab4139cecbd.png"

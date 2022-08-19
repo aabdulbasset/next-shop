@@ -22,13 +22,11 @@ export default async function updateCart(
       "Content-Type": "application/json",
     },
   });
-  toast.success(`Done! ${action}ed to cart`, {
-    position: "top-center",
-    autoClose: 1000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-  });
+  if (action === "remove") {
+    toast.success("Item removed from cart");
+  } else if (action === "add") {
+    toast.success("Item added to cart");
+  } else if (action === "delete") {
+    toast.success("Item deleted from cart");
+  }
 }

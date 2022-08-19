@@ -1,0 +1,3 @@
+Reformatted login/register component
+Fixed cart loading
+added error on adding to cart without logging in
